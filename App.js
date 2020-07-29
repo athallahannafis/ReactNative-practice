@@ -16,9 +16,32 @@ import Detail from './src/screens/detail';
 
 // Navigator
 import Navigator from './route.js';
+import { Button } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const stack = createStackNavigator();
 const drawer = createDrawerNavigator();
+
+const stackComponent = ({navigation}) => {
+  return (
+    <stack.Navigator>
+      <stack.Screen name="Home" component={Home}
+      options={{
+        title: "Home",
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.openDrawer()} >
+            <Text>
+              ...
+            </Text>
+          </TouchableOpacity>
+        )
+      }}/>
+      <stack.Screen name="Simple Counter" component={SimpleCounter} />
+      <stack.Screen name="Render Data" component={RenderData} />
+      <stack.Screen name="Detail" component={Detail} />
+    </stack.Navigator>
+  )
+}
 export default class App extends Component {
   render() {
     // return (
@@ -38,11 +61,14 @@ export default class App extends Component {
           <stack.Screen name="Render Data" component={RenderData} />
           <stack.Screen name="Detail" component={Detail}/>
         </stack.Navigator> */}
-        <drawer.Navigator>
-          <drawer.Screen name="Home" component={Home}/>
-          <drawer.Screen name="Simple Counter" component={SimpleCounter} />
-          <drawer.Screen name="Render Data" component={RenderData} />
-          <drawer.Screen name="Detail" component={Detail}/>
+        <drawer.Navigator screenOptions={{
+          
+        }}>
+          <drawer.Screen name="Home" component={stackComponent}/>
+          <drawer.Screen name="Simple Counter"
+          component={stackComponent} />
+          <drawer.Screen name="Render Data" component={stackComponent} />
+          <drawer.Screen name="Detail" component={stackComponent}/>
         </drawer.Navigator>
       </NavigationContainer>
     )

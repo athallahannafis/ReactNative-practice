@@ -10,10 +10,11 @@ export default class Detail extends React.Component {
 
   render() {
     const detail = this.props.route.params;
+    console.log(detail.detail);
     return (
       <View style={gs.mainContainer}>
-        <Text>
-        {detail}
+        <Text key={detail.id}>
+        {detail.detail}
         </Text>
       </View>
     )
