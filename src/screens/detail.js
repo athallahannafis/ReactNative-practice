@@ -9,13 +9,12 @@ export default class Detail extends React.Component {
     super(props);
   }
 
-
-
   render() {
+    const test = this.props.route.params;
     return (
       <View style={gs.mainContainer}>
         <Text>
-        {this.props.navigation.getParam("detail")}
+        {test}
         </Text>
       </View>
     )

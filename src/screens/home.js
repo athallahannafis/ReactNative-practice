@@ -14,7 +14,7 @@ export default class Home extends Component {
     this.props.navigation.navigate('Simple Counter');
   }
   menu2 = () => {
-    this.props.navigation.navigate("Render data practice");
+    this.props.navigation.navigate("Render Data");
   }
   render() {
     return (

@@ -12,13 +12,12 @@ export default class RenderData extends Component {
       result: [],
     });
   }
-
+  // METHODS
   fetchData = () => {
     for (let i = 0; i < dummy.data.length; i++) {
       this.state.result.push(dummy.data[i]);
     }
   }
-  // METHODS
 
   render() {
     this.fetchData();
@@ -29,9 +28,9 @@ export default class RenderData extends Component {
           <TouchableOpacity style={[
             gs.selectionButton
           ]} 
-          onPress={() => this.props.navigation.navigate("Detail", item)}
+          onPress={() => this.props.navigation.navigate("Detail", item.detail)}
           key={item.id}>
-            <Text>{item.name}</Text>
+            <Text key={item.id}>{item.name}</Text>
             <Text>{item.npm}</Text>
           </TouchableOpacity>
         </View>
