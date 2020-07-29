@@ -30,7 +30,7 @@ export default class RenderData extends Component {
             gs.selectionButton
           ]} 
           onPress={() => this.props.navigation.navigate("Detail", item)}
-          key={item.name}>
+          key={item.id}>
             <Text>{item.name}</Text>
             <Text>{item.npm}</Text>
           </TouchableOpacity>
