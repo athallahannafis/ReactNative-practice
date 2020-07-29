@@ -1,16 +1,19 @@
 {
   "data": [
     {
+      "id": 1,
       "name": "Athallah Annafis",
       "npm": "1706075022",
       "detail": "Detailnya nafis"
     },
     {
+      "id": 2,
       "name": "Yusuf Tri Ardho",
       "npm": "17060749123",
       "detail": "Detailnya Ardho"
     },
     {
+      "id": 3,
       "name": "Muhammad Azhar Raiz Zulkarnain",
       "npm": "1706074869",
       "detail": "Detailnya Azhar"
