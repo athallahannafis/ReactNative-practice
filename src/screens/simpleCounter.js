@@ -68,14 +68,14 @@ export default class SimpleCounter extends Component {
             <TouchableOpacity style={[
             gs.squareButton,
             gs.rowSpacing]}
-            onPress={this.increment}>
-              <Text style={gs.plusMinusFont}>+</Text>
+            onPress={this.decrement}>
+              <Text style={gs.plusMinusFont}>-</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[
             gs.squareButton,
             gs.rowSpacing]}
-            onPress={this.decrement}>
-              <Text style={gs.plusMinusFont}>-</Text>
+            onPress={this.increment}>
+              <Text style={gs.plusMinusFont}>+</Text>
             </TouchableOpacity>
           </View>
         </View>
