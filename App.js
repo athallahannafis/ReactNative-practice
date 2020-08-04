@@ -13,40 +13,91 @@ import SimpleCounter from './src/screens/simpleCounter';
 import RenderData from './src/screens/renderData';
 import Detail from './src/screens/detail';
 
+import Icon from 'react-native-vector-icons/Ionicons';
 
 // Navigator
 import Navigator from './route.js';
-import { Button } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const stack = createStackNavigator();
 const drawer = createDrawerNavigator();
 
-const stackComponent = ({navigation}) => {
+const homeStack = createStackNavigator();
+const simpleCounterStack = createStackNavigator();
+const renderDataStack = createStackNavigator();
+
+const leftToggle = (param) => {
+    return (
+      <View
+      style={{
+        marginLeft: 20
+      }}
+      >
+        <TouchableOpacity
+        onPress={() => param.openDrawer()}
+        >
+          <Text>...</Text>
+        </TouchableOpacity>
+      </View>
+    )
+}
+
+const stackComponent = (props) => {
   return (
-    <stack.Navigator>
-      <stack.Screen name="Home" component={Home}
-      options={{
-        title: "Home",
-        headerLeft: () => (
-          <TouchableOpacity onPress={() => navigation.openDrawer()} >
-            <Text>
-              ...
-            </Text>
-          </TouchableOpacity>
-        )
-      }}/>
+    <stack.Navigator
+    screenOptions={{
+      headerLeft: () => (leftToggle(props.navigation))
+    }}
+    >
+      <stack.Screen name="Home" component={Home}/>
       <stack.Screen name="Simple Counter" component={SimpleCounter} />
       <stack.Screen name="Render Data" component={RenderData} />
       <stack.Screen name="Detail" component={Detail} />
     </stack.Navigator>
   )
 }
+
+// ONE BY ONE
+const homeNav = (props) => {
+  return (
+    <homeStack.Navigator
+    screenOptions={{
+      headerLeft: () => (leftToggle(props.navigation)),
+    }}
+    >
+      <homeStack.Screen
+      name="Home" component={Home}/>
+    </homeStack.Navigator>
+  )
+}
+const simpleCounterNav = (props) => {
+  return (
+    <simpleCounterStack.Navigator
+    screenOptions={{
+      headerLeft: () => (leftToggle(props.navigation)),
+    }}>
+      <simpleCounterStack.Screen
+      name="Simple Counter" component={SimpleCounter} />
+    </simpleCounterStack.Navigator>
+  )
+}
+const renderDataNav = (props) => {
+  return (
+    <renderDataStack.Navigator>
+      <renderDataStack.Screen
+      options={{
+        headerLeft: () => (leftToggle(props.navigation)),
+      }}
+      name="Render Data" component={RenderData} />
+      <renderDataStack.Screen name="Detail" component={Detail} />
+    </renderDataStack.Navigator>
+  )
+}
+
+
 export default class App extends Component {
   render() {
-    // return (
-    //   <Navigator/>
-    // );
     return (
       <NavigationContainer>
         {/* <stack.Navigator screenOptions={{
@@ -61,14 +112,11 @@ export default class App extends Component {
           <stack.Screen name="Render Data" component={RenderData} />
           <stack.Screen name="Detail" component={Detail}/>
         </stack.Navigator> */}
-        <drawer.Navigator screenOptions={{
-          
-        }}>
-          <drawer.Screen name="Home" component={stackComponent}/>
+        <drawer.Navigator>
+          <drawer.Screen name="Home" component={homeNav}/>
           <drawer.Screen name="Simple Counter"
-          component={stackComponent} />
-          <drawer.Screen name="Render Data" component={stackComponent} />
-          <drawer.Screen name="Detail" component={stackComponent}/>
+          component={simpleCounterNav} />
+          <drawer.Screen name="Render Data" component={renderDataNav} />
         </drawer.Navigator>
       </NavigationContainer>
     )
