@@ -43,21 +43,6 @@ const leftToggle = (param) => {
     )
 }
 
-const stackComponent = (props) => {
-  return (
-    <stack.Navigator
-    screenOptions={{
-      headerLeft: () => (leftToggle(props.navigation))
-    }}
-    >
-      <stack.Screen name="Home" component={Home}/>
-      <stack.Screen name="Simple Counter" component={SimpleCounter} />
-      <stack.Screen name="Render Data" component={RenderData} />
-      <stack.Screen name="Detail" component={Detail} />
-    </stack.Navigator>
-  )
-}
-
 // ONE BY ONE
 const homeNav = (props) => {
   return (
