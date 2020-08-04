@@ -16,7 +16,6 @@ import Detail from './src/screens/detail';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 // Navigator
-import Navigator from './route.js';
 import { Button, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
