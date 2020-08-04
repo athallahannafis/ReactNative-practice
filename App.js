@@ -6,7 +6,7 @@
 import React, {Component} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 
 import Home from './src/screens/home';
 import SimpleCounter from './src/screens/simpleCounter';
@@ -82,6 +82,19 @@ const renderDataNav = (props) => {
   )
 }
 
+
+const MyProfile = (props) => {
+  return (
+    <View>
+      <DrawerItem
+      name="Simple Counter"
+      label="Simple Counter"
+      onPress={() => props.navigation.navigate("Simple Counter")}
+      />
+    </View>
+  )
+}
+
 export default class App extends Component {
   render() {
     return (
@@ -98,7 +111,7 @@ export default class App extends Component {
           <stack.Screen name="Render Data" component={RenderData} />
           <stack.Screen name="Detail" component={Detail}/>
         </stack.Navigator> */}
-        <drawer.Navigator>
+        <drawer.Navigator drawerContent={props => <MyProfile {...props} />}>
           <drawer.Screen name="Home" component={homeNav}/>
           <drawer.Screen name="Simple Counter"
           component={simpleCounterNav} />
