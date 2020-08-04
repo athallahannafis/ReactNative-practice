@@ -61,27 +61,30 @@ const stackComponent = (props) => {
 // ONE BY ONE
 const homeNav = (props) => {
   return (
-    <homeStack.Navigator
-    screenOptions={{
-      headerLeft: () => (leftToggle(props.navigation)),
-    }}
-    >
+    <homeStack.Navigator>
       <homeStack.Screen
+      options={{
+        headerLeft: () => (leftToggle(props.navigation)),
+      }}
       name="Home" component={Home}/>
     </homeStack.Navigator>
   )
 }
 const simpleCounterNav = (props) => {
   return (
-    <simpleCounterStack.Navigator
-    screenOptions={{
-      headerLeft: () => (leftToggle(props.navigation)),
-    }}>
+    <simpleCounterStack.Navigator>
       <simpleCounterStack.Screen
+      options={{
+        headerLeft: () => (leftToggle(props.navigation)),
+      }}
       name="Simple Counter" component={SimpleCounter} />
     </simpleCounterStack.Navigator>
   )
 }
+
+/**
+ * Detail gets in this stack because it is part of Render Data
+ */
 const renderDataNav = (props) => {
   return (
     <renderDataStack.Navigator>
@@ -94,7 +97,6 @@ const renderDataNav = (props) => {
     </renderDataStack.Navigator>
   )
 }
-
 
 export default class App extends Component {
   render() {
