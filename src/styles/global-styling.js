@@ -75,5 +75,12 @@ export const globalStyling = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     minWidth: "90%"
+  },
+  profileContainer: {
+    margin: 40,
+    flex: 0,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center"
   }
 })

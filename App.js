@@ -2,22 +2,22 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-// import 'react-native-gesture-handler';
+
 import React, {Component} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 
+// Screens
 import Home from './src/screens/home';
 import SimpleCounter from './src/screens/simpleCounter';
 import RenderData from './src/screens/renderData';
 import Detail from './src/screens/detail';
 
-import Icon from 'react-native-vector-icons/Ionicons';
-
-// Navigator
-import { Button, Text, View } from 'react-native';
+import { Button, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import {globalStyling as gs} from './src/styles/global-styling';
 
 const stack = createStackNavigator();
 const drawer = createDrawerNavigator();
@@ -26,6 +26,7 @@ const homeStack = createStackNavigator();
 const simpleCounterStack = createStackNavigator();
 const renderDataStack = createStackNavigator();
 
+// DRAWER TOGGLER
 const leftToggle = (param) => {
     return (
       <View
@@ -34,9 +35,18 @@ const leftToggle = (param) => {
       }}
       >
         <TouchableOpacity
+        style={{
+          width: 40,
+        }}
         onPress={() => param.openDrawer()}
         >
-          <Text>...</Text>
+          <Image 
+          style={{
+            width: 20,
+            height: 20,
+          }}
+          source={require("./src/images/drawer.png")} />
+          {/* <Text>...</Text> */}
         </TouchableOpacity>
       </View>
     )
@@ -86,8 +96,16 @@ const renderDataNav = (props) => {
 const MyProfile = (props) => {
   return (
     <View>
+      <View style={[
+        gs.profileContainer,
+      ]}>
+        <Text>Put your profile here</Text>
+      </View>
       <DrawerItem
-      name="Simple Counter"
+      label="Home"
+      onPress={() => props.navigation.navigate("Home")}
+      />
+      <DrawerItem
       label="Simple Counter"
       onPress={() => props.navigation.navigate("Simple Counter")}
       />
