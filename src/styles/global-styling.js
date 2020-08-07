@@ -77,10 +77,19 @@ export const globalStyling = StyleSheet.create({
     minWidth: "90%"
   },
   profileContainer: {
-    margin: 40,
+    padding: 40,
     flex: 0,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center"
+  },
+  drawerItem: {
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingLeft: 30,
+    paddingRight: 40,
+    flex: 0,
+    flexDirection: "row",
+    borderRadius: 1000
   }
 })
