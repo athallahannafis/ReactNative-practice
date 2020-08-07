@@ -4,7 +4,7 @@
  */
 
 import React, {Component} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DrawerActions} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 
@@ -14,7 +14,7 @@ import SimpleCounter from './src/screens/simpleCounter';
 import RenderData from './src/screens/renderData';
 import Detail from './src/screens/detail';
 
-import { Button, Text, View, Image } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import {globalStyling as gs} from './src/styles/global-styling';
@@ -22,12 +22,21 @@ import {globalStyling as gs} from './src/styles/global-styling';
 const stack = createStackNavigator();
 const drawer = createDrawerNavigator();
 
+// Must make the stack for each parent feature
 const homeStack = createStackNavigator();
 const simpleCounterStack = createStackNavigator();
 const renderDataStack = createStackNavigator();
 
-// DRAWER TOGGLER
-const leftToggle = (param) => {
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // if needed
+      num: 0, 
+    }
+  }
+  // DRAWER TOGGLER
+  leftToggle = (props) => {
     return (
       <View
       style={{
@@ -38,7 +47,7 @@ const leftToggle = (param) => {
         style={{
           width: 40,
         }}
-        onPress={() => param.openDrawer()}
+        onPress={ () => props.navigation.openDrawer() }
         >
           <Image 
           style={{
@@ -46,74 +55,85 @@ const leftToggle = (param) => {
             height: 20,
           }}
           source={require("./src/images/drawer.png")} />
-          {/* <Text>...</Text> */}
         </TouchableOpacity>
       </View>
     )
-}
+  }
 
-// ONE BY ONE
-const homeNav = (props) => {
-  return (
-    <homeStack.Navigator>
-      <homeStack.Screen
-      options={{
-        headerLeft: () => (leftToggle(props.navigation)),
-      }}
-      name="Home" component={Home}/>
-    </homeStack.Navigator>
-  )
-}
-const simpleCounterNav = (props) => {
-  return (
-    <simpleCounterStack.Navigator>
-      <simpleCounterStack.Screen
-      options={{
-        headerLeft: () => (leftToggle(props.navigation)),
-      }}
-      name="Simple Counter" component={SimpleCounter} />
-    </simpleCounterStack.Navigator>
-  )
-}
+  // ONE BY ONE
+  /**
+  * I assume each feature has one stack, and sub feature from the parent feature
+  * needs to be in one stack with the parent, for example in this render data
+  * practice.
+  */
+  homeNav = (props) => {
+    return (
+      <homeStack.Navigator>
+        <homeStack.Screen
+        options={{
+          headerLeft: () => (this.leftToggle(props)),
+        }}
+        name="Home" component={Home}/>
+      </homeStack.Navigator>
+    )
+  }
+  simpleCounterNav = (props) => {
+    return (
+      <simpleCounterStack.Navigator>
+        <simpleCounterStack.Screen
+        options={{
+          headerLeft: () => (this.leftToggle(props)),
+        }}
+        name="Simple Counter" component={SimpleCounter} />
+      </simpleCounterStack.Navigator>
+    )
+  }
 
-/**
- * Detail gets in this stack because it is part of Render Data
- */
-const renderDataNav = (props) => {
-  return (
-    <renderDataStack.Navigator>
-      <renderDataStack.Screen
-      options={{
-        headerLeft: () => (leftToggle(props.navigation)),
-      }}
-      name="Render Data" component={RenderData} />
-      <renderDataStack.Screen name="Detail" component={Detail} />
-    </renderDataStack.Navigator>
-  )
-}
+  /**
+  * Detail gets in this stack because it is part of Render Data
+  */
+  renderDataNav = (props) => {
+    return (
+      <renderDataStack.Navigator>
+        <renderDataStack.Screen
+        options={{
+          headerLeft: () => (this.leftToggle(props)),
+        }}
+        name="Render Data" component={RenderData} />
+        <renderDataStack.Screen name="Detail" component={Detail} />
+      </renderDataStack.Navigator>
+    )
+  }
 
-
-const MyProfile = (props) => {
-  return (
-    <View>
-      <View style={[
-        gs.profileContainer,
-      ]}>
-        <Text>Put your profile here</Text>
+  CustomDrawer = (props) => {
+    return (
+      <View>
+        <View style={[
+          gs.profileContainer,
+        ]}>
+          <Image source={require("./src/images/seele.jpg")}
+          style={{
+            width: 60,
+            height: 60,
+            borderRadius: 100,
+            marginBottom: 20,
+          }}
+          />
+          <Text>Seele Vollerei</Text>
+        </View>
+        <DrawerItem
+        label="Home"
+        onPress={() => props.navigation.navigate("Home")}
+        />
+        <DrawerItem
+        label="Simple Counter"
+        onPress={() => props.navigation.navigate("Simple Counter")}
+        />
       </View>
-      <DrawerItem
-      label="Home"
-      onPress={() => props.navigation.navigate("Home")}
-      />
-      <DrawerItem
-      label="Simple Counter"
-      onPress={() => props.navigation.navigate("Simple Counter")}
-      />
-    </View>
-  )
-}
+    )
+  }
 
-export default class App extends Component {
+
   render() {
     return (
       <NavigationContainer>
@@ -129,11 +149,12 @@ export default class App extends Component {
           <stack.Screen name="Render Data" component={RenderData} />
           <stack.Screen name="Detail" component={Detail}/>
         </stack.Navigator> */}
-        <drawer.Navigator drawerContent={props => <MyProfile {...props} />}>
-          <drawer.Screen name="Home" component={homeNav}/>
+        <drawer.Navigator drawerContent={props => <this.CustomDrawer {...props} />}>
+          
+          <drawer.Screen name="Home" component={this.homeNav}/>
           <drawer.Screen name="Simple Counter"
-          component={simpleCounterNav} />
-          <drawer.Screen name="Render Data" component={renderDataNav} />
+          component={this.simpleCounterNav} />
+          <drawer.Screen name="Render Data" component={this.renderDataNav} />
         </drawer.Navigator>
       </NavigationContainer>
     )
