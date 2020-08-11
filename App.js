@@ -16,8 +16,7 @@ import RenderDataScreen from './src/bottomtab-screens/renderData';
 import DetailScreen from './src/bottomtab-screens/detail';
 
 // Drawer screens
-import TestScreen from './src/drawer-screens/test';
-import Profile from './src/drawer-screens/profile';
+import ProfileScreen from './src/drawer-screens/edit-profile';
 
 import { Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -31,7 +30,7 @@ const bottomTab = createBottomTabNavigator();
 const homeStack = createStackNavigator();
 const simpleCounterStack = createStackNavigator();
 const renderDataStack = createStackNavigator();
-const testStack = createStackNavigator();
+const profileStack = createStackNavigator();
 
 export default class App extends Component {
   constructor(props) {
@@ -44,9 +43,7 @@ export default class App extends Component {
 
   CustomDrawer = (props) => {
     return (
-      <View style={{
-        backgroundColor: "#7cde96"
-      }}>
+      <View>
         <View style={[
           gs.profileContainer, {
             backgroundColor: "#7ee0ce"
@@ -54,18 +51,33 @@ export default class App extends Component {
         ]}>
           <Image source={require("./src/images/seele.jpg")}
           style={{
-            width: 60,
-            height: 60,
+            width: 80,
+            height: 80,
             borderRadius: 100,
-            marginBottom: 20,
+            marginBottom: 10,
           }}
           />
-          <Text>Seele Vollerei</Text>
+          <Text style={{
+            fontSize: 20
+          }}>Seele Vollerei</Text>
+          <TouchableOpacity
+          style={{
+            marginTop: 20,
+            backgroundColor: "#40ad42",
+            borderRadius: 1000,
+            paddingVertical: 5,
+            paddingHorizontal: 15,
+          }}>
+            <Text style={{
+              color: "white",
+              fontWeight: "bold"
+            }}>Edit Profile</Text>
+          </TouchableOpacity>
         </View>
 
         {/* CUSTOM DRAWER ITEM */}
         <TouchableOpacity style={gs.drawerItem}
-        onPress={() => props.navigation.navigate("bottom-tab")}>
+        onPress={() => props.navigation.navigate("Home")}>
           <Text>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity style={gs.drawerItem}
@@ -73,8 +85,8 @@ export default class App extends Component {
           <Text>Simple Counter</Text>
         </TouchableOpacity>
         <TouchableOpacity style={gs.drawerItem}
-        onPress={() => props.navigation.navigate("test-screen")}>
-          <Text>Test me!</Text>
+        onPress={() => props.navigation.navigate("Profile")}>
+          <Text>View Profile</Text>
         </TouchableOpacity>
 
         {/* LIBRARY DRAWER ITEM */}
@@ -93,15 +105,9 @@ export default class App extends Component {
   // DRAWER TOGGLER
   leftToggle = (props) => {
     return (
-      <View
-      style={{
-        marginLeft: 20
-      }}
-      >
+      <View style={{marginLeft: 20}}>
         <TouchableOpacity
-        style={{
-          width: 40,
-        }}
+        style={{width: 40,}}
         onPress={ () => props.navigation.openDrawer() }
         >
           <Image 
@@ -110,6 +116,35 @@ export default class App extends Component {
             height: 20,
           }}
           source={require("./src/images/drawer.png")} />
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  backButton = (props) => {
+    const backString = "<="
+    return (
+      <View style={{marginLeft: 10}}>
+        <TouchableOpacity
+        style={{
+          width: 40,
+          height: 40,
+          flex: 0,
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: 1000
+        }} onPress={() => props.navigation.navigate("Home")}>
+          {/* <Text style={{
+            fontSize: 30,
+          }}>{backString}</Text> */}
+          <Image  
+          style={{
+            width:40,
+            height:40
+          }}
+          source={require('./src/images/back-icon.png')}
+          />
         </TouchableOpacity>
       </View>
     )
@@ -138,27 +173,25 @@ export default class App extends Component {
         component={this.counterStackScreen}/>
         <bottomTab.Screen name="Render Data"
         component={this.renderDataStackScreen}/>
-        <bottomTab.Screen name="test-screen"
-        component={this.testStackScreen} />
       </bottomTab.Navigator>
     )
   }
 
   // ONE BY ONE
   /**
-  * Each feature has one stack, and sub feature from the parent feature
+  * Each parent feature has one stack, and sub feature from the parent feature
   * needs to be in one stack with the parent, for example in this render data
   * practice.
   */
-  testStackScreen = (props) => {
+  profileStackScreen = (props) => {
     return (
-      <testStack.Navigator>
-        <testStack.Screen
+      <profileStack.Navigator>
+        <profileStack.Screen
         options={{
-          headerLeft: () => (this.leftToggle(props)),
+          headerLeft: () => (this.backButton(props)),
         }}
-        name="Test me!" component={TestScreen}/>
-      </testStack.Navigator>
+        name="Profile" component={ProfileScreen} />
+      </profileStack.Navigator>
     )
   }
 
@@ -169,10 +202,11 @@ export default class App extends Component {
         options={{
           headerLeft: () => (this.leftToggle(props)),
         }}
-        name="Home" component={HomeScreen}/>
+        name="Home Screen" component={HomeScreen}/>
       </homeStack.Navigator>
     )
   }
+
   counterStackScreen = (props) => {
     return (
       <simpleCounterStack.Navigator>
@@ -180,12 +214,11 @@ export default class App extends Component {
         options={{
           headerLeft: () => (this.leftToggle(props)),
         }}
-        name="Simple Counter" component={SimpleCounterScreen} />
+        name="Simple Counter Screen" component={SimpleCounterScreen} />
       </simpleCounterStack.Navigator>
     )
   }
 
-  
   //Detail gets in this stack because it is part of Render Data
   renderDataStackScreen = (props) => {
     return (
@@ -194,8 +227,8 @@ export default class App extends Component {
         options={{
           headerLeft: () => (this.leftToggle(props)),
         }}
-        name="Render Data" component={RenderDataScreen} />
-        <renderDataStack.Screen name="Detail" component={DetailScreen} />
+        name="Render Data Screen" component={RenderDataScreen} />
+        <renderDataStack.Screen name="Detail Screen" component={DetailScreen} />
       </renderDataStack.Navigator>
     )
   }
@@ -219,14 +252,8 @@ export default class App extends Component {
         drawerContent={props => <this.CustomDrawer {...props} />}>
           <drawer.Screen name="bottom-tab"
           component={this.bottomTabComponent}/>
-          <drawer.Screen name="Home"
-          component={this.homeStackScreen}/>
-          <drawer.Screen name="Simple Counter"
-          component={this.counterStackScreen} />
-          <drawer.Screen name="Render Data"
-          component={this.renderDataStackScreen} />
-          <drawer.Screen name="test-screen"
-          component={this.testStackScreen}/>
+          <drawer.Screen name="Profile"
+          component={this.profileStackScreen}/>
         </drawer.Navigator>
       </NavigationContainer>
     )
