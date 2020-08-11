@@ -28,10 +28,9 @@ export default class RenderData extends Component {
           <TouchableOpacity style={[
             gs.selectionButton
           ]} 
-          onPress={() => this.props.navigation.navigate("Detail", item)}
+          onPress={() => this.props.navigation.navigate("Detail Screen", item)}
           key={item.id}>
-            <Text key={item.id}>{item.name}</Text>
-            <Text key={item.id}>{item.npm}</Text>
+            <Text key={item.id}>{item.name} {item.npm}</Text>
           </TouchableOpacity>
         </View>
       );
