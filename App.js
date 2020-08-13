@@ -92,18 +92,6 @@ export default class App extends Component {
   render() {
     return (
       <NavigationContainer>
-        {/* <stack.Navigator screenOptions={{
-          headerStyle: {
-            backgroundColor:"#009387",
-          },
-          headerTintColor: "white",
-          headerTitleStyle: "bold",
-        }}>
-          <stack.Screen name="Home" component={Home}/>
-          <stack.Screen name="Simple Counter" component={SimpleCounter} />
-          <stack.Screen name="Render Data" component={RenderData} />
-          <stack.Screen name="Detail" component={Detail}/>
-        </stack.Navigator> */}
         <drawer.Navigator
         drawerContent={props => <CustomDrawer {...props} />}>
           <drawer.Screen name="bottom-tab"
