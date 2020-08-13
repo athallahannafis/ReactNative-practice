@@ -6,7 +6,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import BottomTabComponent from '../bottomtab-screens/bottom-tab';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import ProfileScreen from './Profile';
+import ProfileScreen from './profile';
 
 const drawer = createDrawerNavigator();
 
