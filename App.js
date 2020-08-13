@@ -228,7 +228,11 @@ export default class App extends Component {
           headerLeft: () => (this.leftToggle(props)),
         }}
         name="Render Data Screen" component={RenderDataScreen} />
-        <renderDataStack.Screen name="Detail Screen" component={DetailScreen} />
+        <renderDataStack.Screen 
+        options={{
+          headerLeft: () => (this.backButton(props)),
+        }}
+        name="Detail Screen" component={DetailScreen} />
       </renderDataStack.Navigator>
     )
   }
