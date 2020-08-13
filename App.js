@@ -10,6 +10,7 @@ import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 // Bottom tab Screens
+import BottomTabComponent from './src/bottomtab-screens/bottom-tab';
 import HomeScreen from './src/bottomtab-screens/home';
 import SimpleCounterScreen from './src/bottomtab-screens/simpleCounter';
 import RenderDataScreen from './src/bottomtab-screens/renderData';
@@ -17,7 +18,7 @@ import DetailScreen from './src/bottomtab-screens/detail';
 
 // Drawer screens
 import CustomDrawer from './src/drawer-screens/cutom-drawer';
-import ProfileScreen from './src/drawer-screens/edit-profile';
+import ProfileScreen from './src/drawer-screens/Profile';
 
 import { Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -42,33 +43,6 @@ export default class App extends Component {
     }
   }
 
-  // BottomTab component
-  bottomTabComponent = (props) => {
-    return (
-      <bottomTab.Navigator
-      tabBarOptions={{
-        labelStyle:{
-          marginBottom: 10,
-          fontSize: 15,
-          fontWeight: "bold",
-        },
-        tabStyle: {
-          backgroundColor: "white",
-          borderstyle: "solid",
-          borderStartColor: "black"
-        },
-        activeBackgroundColor: "blue",
-      }}>
-        <bottomTab.Screen name="Home"
-        component={this.homeStackScreen}/>
-        <bottomTab.Screen name="Simple Counter"
-        component={this.counterStackScreen}/>
-        <bottomTab.Screen name="Render Data"
-        component={this.renderDataStackScreen}/>
-      </bottomTab.Navigator>
-    )
-  }
-
   // ONE BY ONE
   /**
   * Each parent feature has one stack, and sub feature from the parent feature
@@ -87,69 +61,7 @@ export default class App extends Component {
     )
   }
 
-  homeStackScreen = (props) => {
-    return (
-      <homeStack.Navigator>
-        <homeStack.Screen
-        options={{
-          headerLeft: () => (this.leftToggle(props)),
-        }}
-        name="Home Screen" component={HomeScreen}/>
-      </homeStack.Navigator>
-    )
-  }
-
-  counterStackScreen = (props) => {
-    return (
-      <simpleCounterStack.Navigator>
-        <simpleCounterStack.Screen
-        options={{
-          headerLeft: () => (this.leftToggle(props)),
-        }}
-        name="Simple Counter Screen" component={SimpleCounterScreen} />
-      </simpleCounterStack.Navigator>
-    )
-  }
-
-  //Detail gets in this stack because it is part of Render Data
-  renderDataStackScreen = (props) => {
-    return (
-      <renderDataStack.Navigator>
-        <renderDataStack.Screen
-        options={{
-          headerLeft: () => (this.leftToggle(props)),
-        }}
-        name="Render Data Screen" component={RenderDataScreen} />
-        <renderDataStack.Screen 
-        options={{
-          headerLeft: () => (this.backButton(props, "Render Data Screen")),
-        }}
-        name="Detail Screen" component={DetailScreen} />
-      </renderDataStack.Navigator>
-    )
-  }
-
-  // DRAWER TOGGLER
-  leftToggle = (props) => {
-    return (
-      <View style={{marginLeft: 20}}>
-        <TouchableOpacity
-        style={{width: 40,}}
-        onPress={ () => props.navigation.openDrawer() }
-        >
-          <Image 
-          style={{
-            width: 20,
-            height: 20,
-          }}
-          source={require("./src/images/drawer.png")} />
-        </TouchableOpacity>
-      </View>
-    )
-  }
-
   backButton = (props, destination) => {
-    const backString = "<="
     return (
       <View style={{marginLeft: 10}}>
         <TouchableOpacity
@@ -195,7 +107,7 @@ export default class App extends Component {
         <drawer.Navigator
         drawerContent={props => <CustomDrawer {...props} />}>
           <drawer.Screen name="bottom-tab"
-          component={this.bottomTabComponent}/>
+          component={BottomTabComponent}/>
           <drawer.Screen name="Profile"
           component={this.profileStackScreen} />
         </drawer.Navigator>
