@@ -4,16 +4,16 @@
  */
 
 import React, {Component} from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 // Screens
 import HomeScreen from './home';
 import DetailScreen from './detail';
 import RenderDataScreen from './renderData';
 import SimpleCounterScreen from './simpleCounter';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Image } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const homeStack = createStackNavigator();
 const renderDataStack = createStackNavigator();
