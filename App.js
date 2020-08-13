@@ -42,6 +42,93 @@ export default class App extends Component {
     }
   }
 
+  // BottomTab component
+  bottomTabComponent = (props) => {
+    return (
+      <bottomTab.Navigator
+      tabBarOptions={{
+        labelStyle:{
+          marginBottom: 10,
+          fontSize: 15,
+          fontWeight: "bold",
+        },
+        tabStyle: {
+          backgroundColor: "white",
+          borderstyle: "solid",
+          borderStartColor: "black"
+        },
+        activeBackgroundColor: "blue",
+      }}>
+        <bottomTab.Screen name="Home"
+        component={this.homeStackScreen}/>
+        <bottomTab.Screen name="Simple Counter"
+        component={this.counterStackScreen}/>
+        <bottomTab.Screen name="Render Data"
+        component={this.renderDataStackScreen}/>
+      </bottomTab.Navigator>
+    )
+  }
+
+  // ONE BY ONE
+  /**
+  * Each parent feature has one stack, and sub feature from the parent feature
+  * needs to be in one stack with the parent, for example in this render data
+  * practice.
+  */
+  profileStackScreen = (props) => {
+    return (
+      <profileStack.Navigator>
+        <profileStack.Screen
+        options={{
+          headerLeft: () => (this.backButton(props, "bottom-tab")),
+        }}
+        name="Profile Screen" component={ProfileScreen} />
+      </profileStack.Navigator>
+    )
+  }
+
+  homeStackScreen = (props) => {
+    return (
+      <homeStack.Navigator>
+        <homeStack.Screen
+        options={{
+          headerLeft: () => (this.leftToggle(props)),
+        }}
+        name="Home Screen" component={HomeScreen}/>
+      </homeStack.Navigator>
+    )
+  }
+
+  counterStackScreen = (props) => {
+    return (
+      <simpleCounterStack.Navigator>
+        <simpleCounterStack.Screen
+        options={{
+          headerLeft: () => (this.leftToggle(props)),
+        }}
+        name="Simple Counter Screen" component={SimpleCounterScreen} />
+      </simpleCounterStack.Navigator>
+    )
+  }
+
+  //Detail gets in this stack because it is part of Render Data
+  renderDataStackScreen = (props) => {
+    return (
+      <renderDataStack.Navigator>
+        <renderDataStack.Screen
+        options={{
+          headerLeft: () => (this.leftToggle(props)),
+        }}
+        name="Render Data Screen" component={RenderDataScreen} />
+        <renderDataStack.Screen 
+        options={{
+          headerLeft: () => (this.backButton(props, "Render Data Screen")),
+        }}
+        name="Detail Screen" component={DetailScreen} />
+      </renderDataStack.Navigator>
+    )
+  }
+
   // DRAWER TOGGLER
   leftToggle = (props) => {
     return (
@@ -90,93 +177,6 @@ export default class App extends Component {
     )
   }
 
-  // BottomTab component
-  bottomTabComponent = (props) => {
-    return (
-      <bottomTab.Navigator
-      tabBarOptions={{
-        labelStyle:{
-          marginBottom: 10,
-          fontSize: 15,
-          fontWeight: "bold",
-        },
-        tabStyle: {
-          backgroundColor: "white",
-          borderstyle: "solid",
-          borderStartColor: "black"
-        },
-        activeBackgroundColor: "blue",
-      }}>
-        <bottomTab.Screen name="Home"
-        component={this.homeStackScreen}/>
-        <bottomTab.Screen name="Simple Counter"
-        component={this.counterStackScreen}/>
-        <bottomTab.Screen name="Render Data"
-        component={this.renderDataStackScreen}/>
-      </bottomTab.Navigator>
-    )
-  }
-
-  // ONE BY ONE
-  /**
-  * Each parent feature has one stack, and sub feature from the parent feature
-  * needs to be in one stack with the parent, for example in this render data
-  * practice.
-  */
-  profileStackScreen = (props) => {
-    return (
-      <profileStack.Navigator>
-        <profileStack.Screen
-        options={{
-          headerLeft: () => (this.backButton(props, "bottom-tab")),
-        }}
-        name="Profile" component={ProfileScreen} />
-      </profileStack.Navigator>
-    )
-  }
-
-  homeStackScreen = (props) => {
-    return (
-      <homeStack.Navigator>
-        <homeStack.Screen
-        options={{
-          headerLeft: () => (this.leftToggle(props)),
-        }}
-        name="Home Screen" component={HomeScreen}/>
-      </homeStack.Navigator>
-    )
-  }
-
-  counterStackScreen = (props) => {
-    return (
-      <simpleCounterStack.Navigator>
-        <simpleCounterStack.Screen
-        options={{
-          headerLeft: () => (this.leftToggle(props)),
-        }}
-        name="Simple Counter Screen" component={SimpleCounterScreen} />
-      </simpleCounterStack.Navigator>
-    )
-  }
-
-  //Detail gets in this stack because it is part of Render Data
-  renderDataStackScreen = (props) => {
-    return (
-      <renderDataStack.Navigator>
-        <renderDataStack.Screen
-        options={{
-          headerLeft: () => (this.leftToggle(props)),
-        }}
-        name="Render Data Screen" component={RenderDataScreen} />
-        <renderDataStack.Screen 
-        options={{
-          headerLeft: () => (this.backButton(props, "Render Data Screen")),
-        }}
-        name="Detail Screen" component={DetailScreen} />
-      </renderDataStack.Navigator>
-    )
-  }
-
   render() {
     return (
       <NavigationContainer>
@@ -197,7 +197,7 @@ export default class App extends Component {
           <drawer.Screen name="bottom-tab"
           component={this.bottomTabComponent}/>
           <drawer.Screen name="Profile"
-          component={this.profileStackScreen}/>
+          component={this.profileStackScreen} />
         </drawer.Navigator>
       </NavigationContainer>
     )
