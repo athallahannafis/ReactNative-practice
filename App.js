@@ -12,10 +12,6 @@ import CustomDrawer from './src/drawer-screens/custom-drawer';
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // if needed
-      num: 0, 
-    }
   }
   render() {
     return (
