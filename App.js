@@ -16,6 +16,7 @@ import RenderDataScreen from './src/bottomtab-screens/renderData';
 import DetailScreen from './src/bottomtab-screens/detail';
 
 // Drawer screens
+import CustomDrawer from './src/drawer-screens/cutom-drawer';
 import ProfileScreen from './src/drawer-screens/edit-profile';
 
 import { Text, View, Image } from 'react-native';
@@ -41,67 +42,6 @@ export default class App extends Component {
     }
   }
 
-  CustomDrawer = (props) => {
-    return (
-      <View>
-        <View style={[
-          gs.profileContainer, {
-            backgroundColor: "#7ee0ce"
-          }
-        ]}>
-          <Image source={require("./src/images/seele.jpg")}
-          style={{
-            width: 80,
-            height: 80,
-            borderRadius: 100,
-            marginBottom: 10,
-          }}
-          />
-          <Text style={{
-            fontSize: 20
-          }}>Seele Vollerei</Text>
-          <TouchableOpacity
-          style={{
-            marginTop: 20,
-            backgroundColor: "#40ad42",
-            borderRadius: 1000,
-            paddingVertical: 5,
-            paddingHorizontal: 15,
-          }}>
-            <Text style={{
-              color: "white",
-              fontWeight: "bold"
-            }}>Edit Profile</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* CUSTOM DRAWER ITEM */}
-        <TouchableOpacity style={gs.drawerItem}
-        onPress={() => props.navigation.navigate("Home")}>
-          <Text>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={gs.drawerItem}
-        onPress={() => props.navigation.navigate("Simple Counter")}>
-          <Text>Simple Counter</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={gs.drawerItem}
-        onPress={() => props.navigation.navigate("Profile")}>
-          <Text>View Profile</Text>
-        </TouchableOpacity>
-
-        {/* LIBRARY DRAWER ITEM */}
-        {/* <DrawerItem
-        label="Home"
-        onPress={() => props.navigation.navigate("Home")}
-        />
-        <DrawerItem
-        label="Simple Counter"
-        onPress={() => props.navigation.navigate("Simple Counter")}
-        /> */}
-      </View>
-    )
-  }
-
   // DRAWER TOGGLER
   leftToggle = (props) => {
     return (
@@ -121,7 +61,7 @@ export default class App extends Component {
     )
   }
 
-  backButton = (props) => {
+  backButton = (props, destination) => {
     const backString = "<="
     return (
       <View style={{marginLeft: 10}}>
@@ -134,7 +74,7 @@ export default class App extends Component {
           alignItems: "center",
           justifyContent: "center",
           borderRadius: 1000
-        }} onPress={() => props.navigation.navigate("Home")}>
+        }} onPress={() => props.navigation.navigate(destination)}>
           {/* <Text style={{
             fontSize: 30,
           }}>{backString}</Text> */}
@@ -188,7 +128,7 @@ export default class App extends Component {
       <profileStack.Navigator>
         <profileStack.Screen
         options={{
-          headerLeft: () => (this.backButton(props)),
+          headerLeft: () => (this.backButton(props, "bottom-tab")),
         }}
         name="Profile" component={ProfileScreen} />
       </profileStack.Navigator>
@@ -230,7 +170,7 @@ export default class App extends Component {
         name="Render Data Screen" component={RenderDataScreen} />
         <renderDataStack.Screen 
         options={{
-          headerLeft: () => (this.backButton(props)),
+          headerLeft: () => (this.backButton(props, "Render Data Screen")),
         }}
         name="Detail Screen" component={DetailScreen} />
       </renderDataStack.Navigator>
@@ -253,7 +193,7 @@ export default class App extends Component {
           <stack.Screen name="Detail" component={Detail}/>
         </stack.Navigator> */}
         <drawer.Navigator
-        drawerContent={props => <this.CustomDrawer {...props} />}>
+        drawerContent={props => <CustomDrawer {...props} />}>
           <drawer.Screen name="bottom-tab"
           component={this.bottomTabComponent}/>
           <drawer.Screen name="Profile"
