@@ -3,10 +3,13 @@ import {globalStyling as gs} from '../styles/global-styling';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text, View, Image } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import BottomTabComponent from '../bottomtab-screens/bottom-tab';
 import { createStackNavigator } from '@react-navigation/stack';
 
+// Screens
 import ProfileScreen from './profile';
+
+// Bottom tab
+import BottomTabComponent from '../bottomtab-screens/bottom-tab';
 
 const drawer = createDrawerNavigator();
 
