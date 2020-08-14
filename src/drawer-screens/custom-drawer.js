@@ -11,6 +11,9 @@ import ProfileScreen from './profile';
 // Bottom tab
 import BottomTabComponent from '../bottomtab-screens/bottom-tab';
 
+// Extra
+import BackButton from '../extra-component/back-button';
+
 const drawer = createDrawerNavigator();
 
 const profileStack = createStackNavigator();
@@ -28,7 +31,7 @@ export default class CustomDrawer extends Component {
       <profileStack.Navigator>
         <profileStack.Screen
         options={{
-          headerLeft: () => (this.backButton(props, "bottom-tab")),
+          headerLeft: () => (BackButton(props, "bottom-tab")),
         }}
         name="Profile Screen" component={ProfileScreen}/>
       </profileStack.Navigator>
@@ -38,88 +41,60 @@ export default class CustomDrawer extends Component {
   CustomDrawer = (props) => {
     return (
       <View>
-      <View style={[
-        gs.profileContainer, {
-          backgroundColor: "#7ee0ce"
-        }
-      ]}>
-        <Image source={require("../images/seele.jpg")}
-        style={{
-          width: 80,
-          height: 80,
-          borderRadius: 100,
-          marginBottom: 10,
-        }}
-        />
-        <Text style={{
-          fontSize: 20
-        }}>Seele Vollerei</Text>
-        <TouchableOpacity
-        style={{
-          marginTop: 20,
-          backgroundColor: "#40ad42",
-          borderRadius: 1000,
-          paddingVertical: 5,
-          paddingHorizontal: 15,
-        }}>
-          <Text style={{
-            color: "white",
-            fontWeight: "bold"
-          }}>Edit Profile</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* CUSTOM DRAWER ITEM */}
-      <TouchableOpacity style={gs.drawerItem}
-      onPress={() => props.navigation.navigate("Home")}>
-        <Text>Home</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={gs.drawerItem}
-      onPress={() => props.navigation.navigate("Simple Counter")}>
-        <Text>Simple Counter</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={gs.drawerItem}
-      onPress={() => props.navigation.navigate("Profile")}>
-        <Text>View Profile</Text>
-      </TouchableOpacity>
-
-      {/* LIBRARY DRAWER ITEM */}
-      {/* <DrawerItem
-      label="Home"
-      onPress={() => props.navigation.navigate("Home")}
-      />
-      <DrawerItem
-      label="Simple Counter"
-      onPress={() => props.navigation.navigate("Simple Counter")}
-      /> */}
-    </View>
-    )
-  }
-  backButton = (props, destination) => {
-    const backString = "<="
-    return (
-      <View style={{marginLeft: 10}}>
-        <TouchableOpacity
-        style={{
-          width: 40,
-          height: 40,
-          flex: 0,
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          borderRadius: 1000
-        }} onPress={() => props.navigation.navigate(destination)}>
-          {/* <Text style={{
-            fontSize: 30,
-          }}>{backString}</Text> */}
-          <Image
+        <View style={[
+          gs.profileContainer, {
+            backgroundColor: "#7ee0ce"
+          }
+        ]}>
+          <Image source={require("../images/seele.jpg")}
           style={{
-            width:40,
-            height:40
+            width: 80,
+            height: 80,
+            borderRadius: 100,
+            marginBottom: 10,
           }}
-          source={require('../images/back-icon.png')}
           />
+          <Text style={{
+            fontSize: 20
+          }}>Seele Vollerei</Text>
+          <TouchableOpacity
+          style={{
+            marginTop: 20,
+            backgroundColor: "#40ad42",
+            borderRadius: 1000,
+            paddingVertical: 5,
+            paddingHorizontal: 15,
+          }}>
+            <Text style={{
+              color: "white",
+              fontWeight: "bold"
+            }}>Edit Profile</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* CUSTOM DRAWER ITEM */}
+        <TouchableOpacity style={gs.drawerItem}
+        onPress={() => props.navigation.navigate("Home")}>
+          <Text>Home</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={gs.drawerItem}
+        onPress={() => props.navigation.navigate("Simple Counter")}>
+          <Text>Simple Counter</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={gs.drawerItem}
+        onPress={() => props.navigation.navigate("Profile")}>
+          <Text>View Profile</Text>
+        </TouchableOpacity>
+
+        {/* LIBRARY DRAWER ITEM */}
+        {/* <DrawerItem
+        label="Home"
+        onPress={() => props.navigation.navigate("Home")}
+        />
+        <DrawerItem
+        label="Simple Counter"
+        onPress={() => props.navigation.navigate("Simple Counter")}
+        /> */}
       </View>
     )
   }

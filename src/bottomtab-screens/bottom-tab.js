@@ -15,6 +15,10 @@ import DetailScreen from './detail';
 import RenderDataScreen from './renderData';
 import SimpleCounterScreen from './simpleCounter';
 
+// Extra
+import BackButton from '../extra-component/back-button';
+import LeftToggle from '../extra-component/left-toggle';
+
 const homeStack = createStackNavigator();
 const renderDataStack = createStackNavigator();
 const simpleCounterStack = createStackNavigator();
@@ -30,61 +34,13 @@ export default class BottomTab extends Component {
     }
   }
 
-  // DRAWER TOGGLER
-  leftToggle = (props) => {
-    return (
-      <View style={{marginLeft: 20}}>
-        <TouchableOpacity
-        style={{width: 40,}}
-        onPress={ () => props.navigation.openDrawer() }
-        >
-          <Image 
-          style={{
-            width: 20,
-            height: 20,
-          }}
-          source={require("../images/drawer.png")} />
-        </TouchableOpacity>
-      </View>
-    )
-  }
-
-  backButton = (props, destination) => {
-    const backString = "<="
-    return (
-      <View style={{marginLeft: 10}}>
-        <TouchableOpacity
-        style={{
-          width: 40,
-          height: 40,
-          flex: 0,
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          borderRadius: 1000
-        }} onPress={() => props.navigation.navigate(destination)}>
-          {/* <Text style={{
-            fontSize: 30,
-          }}>{backString}</Text> */}
-          <Image
-          style={{
-            width:40,
-            height:40
-          }}
-          source={require('../images/back-icon.png')}
-          />
-        </TouchableOpacity>
-      </View>
-    )
-  }
-
   // STACKS
   homeStackScreen = (props) => {
     return (
       <homeStack.Navigator>
         <homeStack.Screen
         options={{
-          headerLeft: () => (this.leftToggle(props)),
+          headerLeft: () => (LeftToggle(props)),
         }}
         name="Home Screen" component={HomeScreen}/>
       </homeStack.Navigator>
@@ -96,7 +52,7 @@ export default class BottomTab extends Component {
       <simpleCounterStack.Navigator>
         <simpleCounterStack.Screen
         options={{
-          headerLeft: () => (this.leftToggle(props)),
+          headerLeft: () => (LeftToggle(props)),
         }}
         name="Simple Counter Screen" component={SimpleCounterScreen} />
       </simpleCounterStack.Navigator>
@@ -109,12 +65,12 @@ export default class BottomTab extends Component {
       <renderDataStack.Navigator>
         <renderDataStack.Screen
         options={{
-          headerLeft: () => (this.leftToggle(props)),
+          headerLeft: () => (LeftToggle(props)),
         }}
         name="Render Data Screen" component={RenderDataScreen} />
         <renderDataStack.Screen 
         options={{
-          headerLeft: () => (this.backButton(props, "Render Data Screen")),
+          headerLeft: () => (BackButton(props, "Render Data Screen")),
         }}
         name="Detail Screen" component={DetailScreen} />
       </renderDataStack.Navigator>
