@@ -1,6 +1,6 @@
 # Basic React Native practice
-This app consists of several practice for me to get used to react-native for my
-own self-improvement.
+This app consists of several basics of react native front-end practice
+for my own self-improvement.
 <br>
 <br>
 Things I have learned so far:
@@ -10,6 +10,7 @@ Things I have learned so far:
 - State life cycle
 - Styling
 - Make a custom drawer
+- Update local json data
 
 Some youtube reference I watched:
 - [React native setup](https://youtu.be/4j_m_T0u8xU)
