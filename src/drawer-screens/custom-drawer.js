@@ -7,16 +7,21 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
 import ProfileScreen from './profile';
+import EditProfileScreen from './edit-profile';
 
 // Bottom tab
 import BottomTabComponent from '../bottomtab-screens/bottom-tab';
 
 // Extra
 import BackButton from '../extra-component/back-button';
+import ProfileData from '../dummy-data/profile-data.json';
+import Profile from './profile';
 
 const drawer = createDrawerNavigator();
 
 const profileStack = createStackNavigator();
+const editProfileStack = createStackNavigator()
+
 export default class CustomDrawer extends Component {
   constructor(props) {
     super(props);
@@ -38,6 +43,18 @@ export default class CustomDrawer extends Component {
     )
   }
 
+  editProfileStackScreen = (props) => {
+    return (
+      <editProfileStack.Navigator>
+        <editProfileStack.Screen
+        options={{
+          headerLeft: () => (BackButton(props, "bottom-tab")),
+        }}
+        name="Edit Profile Screen" component={EditProfileScreen}/>
+      </editProfileStack.Navigator>
+    )
+  }
+
   CustomDrawer = (props) => {
     return (
       <View>
@@ -56,7 +73,7 @@ export default class CustomDrawer extends Component {
           />
           <Text style={{
             fontSize: 20
-          }}>Seele Vollerei</Text>
+          }}>{ProfileData.data[0].name}</Text>
           <TouchableOpacity
           style={{
             marginTop: 20,
@@ -64,7 +81,8 @@ export default class CustomDrawer extends Component {
             borderRadius: 1000,
             paddingVertical: 5,
             paddingHorizontal: 15,
-          }}>
+          }}
+          onPress={() => props.navigation.navigate("Edit Profile")}>
             <Text style={{
               color: "white",
               fontWeight: "bold"
@@ -74,16 +92,16 @@ export default class CustomDrawer extends Component {
 
         {/* CUSTOM DRAWER ITEM */}
         <TouchableOpacity style={gs.drawerItem}
+        onPress={() => props.navigation.navigate("Profile")}>
+          <Text>View Profile</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={gs.drawerItem}
         onPress={() => props.navigation.navigate("Home")}>
           <Text>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity style={gs.drawerItem}
         onPress={() => props.navigation.navigate("Simple Counter")}>
           <Text>Simple Counter</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={gs.drawerItem}
-        onPress={() => props.navigation.navigate("Profile")}>
-          <Text>View Profile</Text>
         </TouchableOpacity>
 
         {/* LIBRARY DRAWER ITEM */}
@@ -107,6 +125,8 @@ export default class CustomDrawer extends Component {
         component={BottomTabComponent}/>
         <drawer.Screen name="Profile"
         component={this.profileStackScreen}/>
+        <drawer.Screen name="Edit Profile"
+        component={this.editProfileStackScreen}/>
       </drawer.Navigator>
     )
   }
