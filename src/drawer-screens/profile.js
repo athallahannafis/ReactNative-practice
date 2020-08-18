@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 
 import { globalStyling as gs } from '../styles/global-styling';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
+
+// Data
+import ProfileData from '../dummy-data/profile-data.json';
 
 export default class Profile extends Component {
   constructor(props) {
@@ -11,7 +14,16 @@ export default class Profile extends Component {
   render() {
     return (
       <View style={gs.mainContainer}>
-        <Text>This is profile screen</Text>
+        <Image source={require("../images/seele.jpg")}
+        style={{
+          width: 200,
+          height: 200,
+          borderRadius: 100,
+          marginBottom: 10,}}/>
+        <Text
+        style={{marginBottom: 10, fontSize: 35}}>{ ProfileData.data[0].name }</Text>
+        <Text
+        style={{marginBottom: 10}}>{ ProfileData.data[0].detail }</Text>
       </View>
     )
   }
