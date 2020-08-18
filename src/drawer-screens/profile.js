@@ -21,9 +21,9 @@ export default class Profile extends Component {
           borderRadius: 100,
           marginBottom: 10,}}/>
         <Text
-        style={{marginBottom: 10, fontSize: 35}}>{ ProfileData.data[0].name }</Text>
+        style={{marginBottom: 10, fontSize: 35}}>{ ProfileData.data.name }</Text>
         <Text
-        style={{marginBottom: 10}}>{ ProfileData.data[0].detail }</Text>
+        style={{marginBottom: 10}}>{ ProfileData.data.detail }</Text>
       </View>
     )
   }

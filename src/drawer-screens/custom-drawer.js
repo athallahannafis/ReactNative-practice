@@ -73,7 +73,7 @@ export default class CustomDrawer extends Component {
           />
           <Text style={{
             fontSize: 20
-          }}>{ProfileData.data[0].name}</Text>
+          }}>{ProfileData.data.name}</Text>
           <TouchableOpacity
           style={{
             marginTop: 20,

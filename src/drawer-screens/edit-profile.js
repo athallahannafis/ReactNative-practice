@@ -12,7 +12,7 @@ export default class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = ({
-      name: ProfileData.data[0].name,
+      name: ProfileData.data.name,
     })
   }
 
@@ -43,7 +43,7 @@ export default class EditProfile extends Component {
   }
 
   proceedSaving = (newName) => {
-    ProfileData.data[0].name = newName;
+    ProfileData.data.name = newName;
   }
 
   render() {
