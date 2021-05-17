@@ -15,3 +15,5 @@ Things I have learned so far:
 Some youtube reference I watched:
 - [React native setup](https://youtu.be/4j_m_T0u8xU)
 - [React native navigation tutorial (from basic stack to drawer)](https://youtu.be/a9jSyZXYGn8?list=PLQWFhX-gwJbmmqcP-9zMXBaxQbGKfIJY2)
+
+asd
