@@ -53,6 +53,12 @@
       "name": "Muhammad Azhar Raiz Zulkarnain",
       "npm": "1706074869",
       "detail": "Detailnya Azhar"
+    },
+    {
+      "id": 2021,
+      "name": "Hacktoberfest 2021",
+      "npm": "Celebrating Hacktoberfest 2021!",
+      "detail": "Hacking in October for T-Shirt"
     }
   ]
 }
